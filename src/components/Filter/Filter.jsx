@@ -1,14 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { FilterWrapper } from './Filter.styled';
+import { filteredContacts } from 'components/redux/filterSlice';
 
-export const Filter = ({ sorted, onChangeFilter }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter);
+
   return (
     <FilterWrapper>
       <label>Find contact by name</label>
       <input
         type="text"
-        value={sorted}
+        value={filter}
         onChange={evt => {
-          onChangeFilter(evt.target.value);
+          dispatch(filteredContacts(evt.target.value));
         }}
         placeholder="Search contact"
       />
